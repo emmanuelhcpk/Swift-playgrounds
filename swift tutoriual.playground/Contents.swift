@@ -60,6 +60,21 @@ class Persona {
     var nombres : String {
         return self.nombre + self.apellido
     }
+    
+    //observers
+    var edad: Int = 0 {
+        willSet(nuevaEdad) {
+            if(nuevaEdad>=18){
+                print("es mayor de edad \(nuevaEdad)")
+
+            }
+        }
+        didSet {
+            if edad > oldValue  {
+                print("tiene \(edad - oldValue) anos mas")
+            }
+        }
+    }
 }
 //algo a destacar es que para poder modificar ateibutos de la estructura tengo q definirla como una variable, en la clase no es necesario
 var estructura = Estructura()
@@ -67,6 +82,8 @@ var estructuraInicializada = Estructura(nombre:"Emma",apellido:"Velez")
 let clase = Persona()
 clase.nombre = "Juan"
 clase.apellido = "Agudelo"
+clase.edad = 20
+clase.edad = 28
 estructura.nombre = "Pedro"
 print("nombre en la clase",clase.nombre)
 print("nombre en la struct",estructura.nombre)
