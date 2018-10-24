@@ -75,6 +75,8 @@ class Persona {
             }
         }
     }
+    //estaticas propiedades
+    static let cedula = "123456789"
 }
 //algo a destacar es que para poder modificar ateibutos de la estructura tengo q definirla como una variable, en la clase no es necesario
 var estructura = Estructura()
@@ -85,7 +87,7 @@ clase.apellido = "Agudelo"
 clase.edad = 20
 clase.edad = 28
 estructura.nombre = "Pedro"
-print("nombre en la clase",clase.nombre)
+print("nombre en la clase",clase.nombre,Persona.cedula)
 print("nombre en la struct",estructura.nombre)
 print("nombre en estructura inicializada", estructuraInicializada.nombre)
 print("nombre completo ",clase.nombreCompleto(),clase.completo)
@@ -107,3 +109,47 @@ menores = arreglo.filter({
 })
 
 print(menores)
+
+//protocol es una especie de interfaz
+//
+protocol CanShoot {
+    func shoot() -> String
+}
+
+// I'm a laser beam. I can shoot.
+final class LaserBeam: CanShoot {
+    func shoot() -> String {
+        return "Ziiiiiip!"
+    }
+}
+
+// I have weapons and trust me I can fire them all at once. Boom! Boom! Boom!
+final class WeaponsComposite {
+    
+    let weapons: [CanShoot]
+    
+    init(weapons: [CanShoot]) {
+        self.weapons = weapons
+    }
+    
+    func shoot() -> [String] {
+        return weapons.map { $0.shoot() }
+    }
+}
+
+let laser = LaserBeam()
+var weapons = WeaponsComposite(weapons: [laser])
+
+weapons.shoot()
+
+final class RocketLauncher: CanShoot {
+    func shoot() -> String {
+        return "Whoosh!"
+    }
+}
+
+let rocket = RocketLauncher()
+
+weapons = WeaponsComposite(weapons: [laser, rocket])
+weapons.shoot()
+
