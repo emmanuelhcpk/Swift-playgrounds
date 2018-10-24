@@ -44,9 +44,19 @@ struct Estructura {
 class Persona {
     var nombre = ""
     var apellido = ""
+    
+    // contrstucroes
+    init(nombre:String,apellido:String) {
+        <#statements#>
+        self.nombre = nombre
+        self.apellido = apellido
+    }
+    //final previene la sobreescritura
+    final var estatura = 0
     func nombreCompleto() -> String {
         return  self.nombre+" "+self.apellido
     }
+    
     //computed properties
     var completo : String{
         get {
